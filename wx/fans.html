@@ -1,0 +1,215 @@
+<wxs src="live/utils/data-formatter.wxs" module="df" />
+<view class="fans" wx:if="{{ show }}">
+  <view class="header">
+    <text>粉丝榜</text>
+    <image class="question-icon" src="https://b.yzcdn.cn/guang/icon-qa-0919.png" catch:tap="openTips" />
+  </view>
+  <scroll-view scroll-top="{{ scrollTop }}" scroll-y bind:scrolltolower="getFansRankList" lower-threshold="150" class="content">
+    <view class='wrap'>
+      <!-- 奖品展示 -->
+      <view class="prize-wrap2" wx:if="{{ prizeList.length >= 1 }}">
+        <image class="text-logo" src="https://img.yzcdn.cn/upload_files/2020/07/02/FndriQJU66xUdqjralCqPLL_JWha.png" mode="aspectFill" alt="助力得奖品" webp />
+        <block wx:if="{{ prizeList.length >= 2 }}">
+          <view wx:if="{{ !showAllPrize }}" class='look-all-prize' bind:tap="openAllPrize">
+            查看全部奖品
+            <van-icon name="arrow-down" custom-class='icon' />
+          </view>
+          <view wx:else class='look-all-prize' bind:tap="closeAllPrize">
+            收起全部奖品
+            <van-icon name="arrow-up" custom-class='icon' />
+          </view>
+        </block>
+        <!-- 缩小的时候滚动奖品 -->
+        <swiper wx:if="{{ !showAllPrize }}" class="item-wrap samll-height" autoplay vertical circular interval="{{5000}}" duration="{{500}}">
+          <swiper-item wx:for="{{ prizeList }}" wx:key="id" wx:for-item="item" class="item">
+            <view class='image-border'>
+              <image class="image" src="{{ df.getImg(item.prizePics) }}" mode="aspectFill" alt="奖品图" webp />
+            </view>
+            <view class="name ~van-ellipsis">{{ item.prizeName }}</view>
+            <view class="ranking">{{ df.formatToString(item.rankStart, item.rankEnd) }}获得</view>
+          </swiper-item>
+        </swiper>
+        <!-- 展示全部的奖品 -->
+        <view wx:else class="item-wrap">
+          <view wx:for="{{ prizeList }}" wx:key="id" wx:for-item="item" class="item">
+            <view class='image-border'>
+              <image class="image" src="{{ df.getImg(item.prizePics) }}" mode="aspectFill" alt="奖品图" webp />
+            </view>
+            <view class="name ~van-ellipsis">{{ item.prizeName }}</view>
+            <view class="ranking">{{ df.formatToString(item.rankStart, item.rankEnd) }}获得</view>
+          </view>
+        </view>
+      </view>
+      <!-- tab切换 -->
+      <view class="tab {{ helpTab === 'fans' ? 'tabs-fans-bg' : 'tabs-boots-bg'}}">
+        <view class="tab-left {{ helpTab === 'fans' ? 'active' : '' }}" bind:tap="changeToFans">
+          粉丝榜单
+        </view>
+        <view class="tab-right {{ helpTab !== 'fans' ? 'active' : '' }}" bind:tap="changeToBoost">
+          我的助力
+        </view>
+      </view>
+      <!-- 数据展示 -->
+      
+      <view class="btm" wx:if="{{ helpTab !== 'fans' }}">
+        <view class="list">
+          <image class="course" src="https://img.yzcdn.cn/upload_files/2020/07/09/Fv7yd_XEP5V4yKRkbO8JHo7nt796.png" mode="widthFix" webp />
+          <!-- <view class="course" /> -->
+          <!-- <view class="activity-item bottom-line">
+            <image class="help-icon-1" src="https://img.yzcdn.cn/upload_files/2020/06/22/Fl2UNgK9kzxdz9wntV6d0xlRwxVx.png" alt="" />
+            <view class="need">
+              <view class="help-title">进入直播间</view>
+              <view class="help-text">已有{{ myBoostInfo.attractedNum || 0 }}个好友接受邀请</view>
+            </view>
+            <view class="item-value">
+              <image class="help-icon-2" src="https://img.yzcdn.cn/upload_files/2020/06/22/FiUZlUtZe1Off4ovH3aq9eMFfvuj.png" alt="" />
+              <view class="help-num">+{{ myBoostInfo.attractedPower || 0 }}助力值</view>
+            </view>
+          </view> -->
+          <view class="activity-item bottom-line">
+            <image class="help-icon-1" src="https://img.yzcdn.cn/upload_files/2020/06/22/Fh9O85EXiOmpP3e8qIvsNqF7fMBs.png" alt="" />
+            <view class="need">
+              <view class="help-title">观看直播</view>
+              <view class="help-text">好友观看时间越长，助力值越高</view>
+            </view>
+            <view class="item-value">
+              <image class="help-icon-2" src="https://img.yzcdn.cn/upload_files/2020/06/22/FiUZlUtZe1Off4ovH3aq9eMFfvuj.png" alt="" />
+              <view class="help-num">+{{ myBoostInfo.watchPower || 0 }}助力值</view>
+            </view>
+          </view>
+          <!-- <view class="activity-item bottom-line">
+            <image class="help-icon-1" src="https://img.yzcdn.cn/upload_files/2020/06/22/FrX7ovvjK3Xc4F0ye5772el_oxjo.png" alt="" />
+            <view class="need">
+              <view class="help-title">订阅下场开播提醒</view>
+              <view class="help-text">好友订阅直播，下场一起看</view>
+            </view>
+            <view class="item-value">
+              <image class="help-icon-2" src="https://img.yzcdn.cn/upload_files/2020/06/22/FiUZlUtZe1Off4ovH3aq9eMFfvuj.png" alt="" />
+              <view class="help-num">+{{ myBoostInfo.rssPower || 0}}助力值</view>
+            </view>
+          </view> -->
+          <view class="activity-item">
+            <image class="help-icon-1" src="https://img.yzcdn.cn/upload_files/2020/06/22/FpLIxoeuke5QZdLalf8YlUIjtlJc.png" alt="" />
+            <view class="need">
+              <view class="help-title">购买宝贝</view>
+              <view class="help-text">好友买买买，助力值更多</view>
+            </view>
+            <view class="item-value">
+              <image class="help-icon-2" src="https://img.yzcdn.cn/upload_files/2020/06/22/FiUZlUtZe1Off4ovH3aq9eMFfvuj.png" alt="" />
+              <view class="help-num">+{{ myBoostInfo.orderPower || 0 }}助力值</view>
+            </view>
+          </view>
+        </view>
+        <!-- 空白 为了撑底部高度 -->
+        <view class="empty" />
+      </view>
+      <view class="btm" wx:else>
+        <view wx:if="{{ fansRankList.length === 0 }}" class="boost-board__list--empty">
+          <image class="empty-img" src="https://b.yzcdn.cn/guang/empty-0919.png" />
+          <view class="empty-title">还没有人上榜</view>
+          <view class="empty-des">邀请好友看直播，为你助力冲榜</view>
+          <view class="empty" />
+        </view>
+        <block wx:else>
+          <view class="help-value-info">
+            <image class="image" src="https://img.yzcdn.cn/upload_files/2020/06/22/FiUZlUtZe1Off4ovH3aq9eMFfvuj.png" alt="" webp />
+            <view class="num">{{ participationNum }}人</view>
+            <view class="text1">正在助力</view>
+            <view class="line"></view>
+            <view>总助力值</view>
+            <view class="num">{{ fansPower }}</view>
+          </view>
+          <view class="boost-board__item top-{{ index }} {{ (index + 1 !== fansRankList.length) ? 'bottom-line' : '' }}" wx:for="{{ fansRankList }}" wx:key="userCode" wx:for-index="index">
+            <block wx:if="{{ index < 3 }}">
+              <image class="top3" src="https://su.yzcdn.cn/guang/{{ index }}.png" />
+            </block>
+            <block wx:else>
+              <view class="rank__index">{{ (index + 1) }}</view>
+            </block>
+            <image class="pic-head" src="{{ df.formatLogo(item.avatar, 'small') }}" mode="aspectFill" webp />
+            <view class="user-info">
+              <view class="nickname ~van-ellipsis">{{ df.maskPhoneNumber(item.nickname) }}</view>
+              <view class="user-id ~van-ellipsis">ID:{{ item.userCode }}</view>
+            </view>
+            <image class="help-icon-2" src="https://img.yzcdn.cn/upload_files/2020/06/22/FiUZlUtZe1Off4ovH3aq9eMFfvuj.png" alt="" />
+            <view class="num">{{ item.fansPower }}助力值</view>
+          </view>
+          <view class="loading" wx:if="{{ loading && !isUploadAll }}">加载中...</view>
+          <!-- 如果仅仅加载过一次，就不展示到底了 所以判断数据是否大于一次分页的数据 -->
+          <view class="divider">
+            <van-divider wx:if="{{ isUploadAll && fansRankList.length > 30 }}" custom-class="divider" contentPosition="center" customStyle="font-size: 10px; padding: 0 20px">
+              没有更多了
+            </van-divider>
+          </view>
+          <!-- 空白 为了撑底部高度 -->
+          <view class="empty" />
+        </block>
+      </view>
+    </view>
+  </scroll-view>
+  <!-- 固定底部个人信息展示 -->
+  <view class="rank-panel">
+    <image class="image" mode="aspectFill" src="{{ df.formatLogo(myBoostInfo.avatar, 'small') }}" alt="" webp />
+    <block wx:if="{{ myBoostInfo.listRank }}">
+      <view class="rank">第{{ myBoostInfo.listRank }}名</view>
+      <view class="line"></view>
+      <text class="rank">{{ myBoostInfo.fansPower || 0 }}</text>
+    </block>
+    <view class="rank" wx:else>未上榜</view>
+    <view class="line"></view>
+    <!-- <swiper class="text" autoplay="{{ autoplay }}" vertical circular interval="{{5000}}" duration="{{500}}">
+      <swiper-item wx:if="{{ !myBoostInfo.fansPowerGap }}" class="list" >
+        邀请好友看直播，为你助力冲榜
+      </swiper-item>
+      <swiper-item wx:else class="list" >
+        距离上一名还差
+        <text class="num">{{ myBoostInfo.fansPowerGap || 0 }}</text>
+        助力值
+      </swiper-item>
+      <swiper-item class="list" >
+        我的助力值
+        <text class="num">{{ myBoostInfo.fansPower || 0 }}</text>
+      </swiper-item>
+    </swiper> -->
+    <view wx:if="{{ !myBoostInfo.fansPowerGap }}" class="text van-ellipsis">邀请好友看直播，为你助力冲榜</view>
+    <view wx:else class="scroll-text">
+      <view class="list">
+        距离上一名还差
+        <text class="num">{{ myBoostInfo.fansPowerGap || 0 }}</text>
+        助力值
+      </view>
+    </view>
+    <view class="sprint">
+      <button class="btn" open-type="share">冲榜</button>
+    </view>
+  </view>
+  <!-- 固定底部萌层 -->
+  <view class="fixed-wrap" />
+</view>
+<!-- 规则弹窗 -->
+<van-popup z-index="{{ 100 }}" show="{{ showTips }}" round closeable close-on-click-overlay bind:close="closeTip" bind:click-overlay="closeTip" class="popup-wrap" custom-class="content">
+  <scroll-view scroll-y class="invite-tip">
+    <view class="title">粉丝榜规则</view>
+    <view class="small-title">一、获得助力值的方式</view>
+    <view class="item">· 邀请好友进入直播间，若好友为爱逛平台新用户则你会获得更多的助力值；</view>
+    <view class="item">· 好友观看直播，观看时间越长你获得助力值越多；</view>
+    <view class="item">· 好友购买直播商品，购买金额越多，你获得的助力值越多，退款会扣除相应助力值；</view>
+    <view class="item">· 好友订阅开播提醒；</view>
+    <view class="small-title">二、奖品相关：</view>
+    <view class="item">· 领奖：获奖的用户，可在获奖弹窗填写奖品收货地址，亦可从【我的】-【中奖记录】内填写地址，填完地址即为完成领奖，等待奖品邮寄。</view>
+    <view class="item">
+      · 发奖：商家将在收到领奖收货地址后10个工作日内进行奖品邮寄，邮费由商家承担，部分地区（如国外、港澳台）邮寄费用高昂，商家可视情况和获奖用户协商。
+    </view>
+    <view class="item">
+      · 爱逛账户，付款账户，收货人姓名，详细地址，联系方式等与消费者身份相关的信息，其中任意一项或数项存在相同，相似，或其他非真实有效等情形的，均可能被认定为同一用户，按同一用户处理。
+    </view>
+    <view class="item">· 因直播中或结束后订单退款产生的助力值及排名变化，相应的奖品发放事宜商家可视情况与获奖用户协商。</view>
+    <view class="small-title">三.其他注意事项：</view>
+    <view class="item">
+      · 若系统检测到用户以不正当手段（如机器作弊、恶意刷榜、扰乱系统等）参与本活动，爱逛平台有权终止用户参与活动并清除其活动数据，且爱逛平台有权根据
+      <text class="agreement" bind:tap="openAgreement">《爱逛用户服务协议》</text>
+      对用户采取其他措施；
+    </view>
+    <view class="item">· 活动解释权在法律范围内归爱逛平台所有。</view>
+  </scroll-view>
+</van-popup>
