@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .box {
+    background: skyblue;
+  }
+
+  .box p {
+    line-height: 120px;
+  }
+
+  .share {
+    width: 100%;
+    height: 400px;
+    background: #ccc;
+  }
+
+  .modal {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 80px;
+    background: url(https://img.yzcdn.cn/upload_files/2020/07/14/FgOXwcVKkhh5EuT1EIg24-yCUyaV.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+</style>
+
+<body>
+  <div class="box">
+    <p>1211</p>
+    <p>1211</p>
+    <p>1211</p>
+    <p>1211</p>
+    <p>1211</p>
+    <p>1211</p>
+    <p>1211</p>
+    <p>1211</p>
+  </div>
+  <div class="modal"></div>
+  <div class="share" id="share">展示的模块</div>
+</body>
+
+<script>
+  // 当前整屏的高度
+  const currentH = window.outerHeight
+
+  // vue 获取屏幕的高度
+  // const { clientHeight } = document.documentElement;
+
+  const shareDom = document.getElementById('share')
+  // 元素具体属性。
+  /*
+  bottom: 894
+  height: 400
+  left: 0
+  right: 375
+  top: 494
+  width: 375
+  x: 0
+  y: 494
+  */
+  function throttle(fn, gapTime) {
+    let _lastTime = null;
+
+    return function () {
+      let _nowTime = +new Date()
+      if (_nowTime - _lastTime > gapTime || !_lastTime) {
+        fn();
+        _lastTime = _nowTime
+      }
+    }
+  }
+
+  const fn = throttle(() => {
+    const shareHeightFromTop = shareDom.getBoundingClientRect().top
+    if (shareHeightFromTop <= currentH) {
+      console.log('shareDom 出现了');
+    }
+  }, 90)
+  window.addEventListener('scroll', fn)
+</script>
+
+</html>
