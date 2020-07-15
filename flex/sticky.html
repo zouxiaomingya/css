@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  article {
+    height: 300px;
+    max-width: 600px;
+    overflow-y: auto;
+    margin: 1em auto;
+  }
+
+  article h4,
+  article footer {
+    position: -webkit-sticky;
+    /* for Safari */
+    position: sticky;
+  }
+
+  article h4 {
+    margin: 2em 0 0;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    top: 0;
+    z-index: 1;
+  }
+
+  article content {
+    display: block;
+    background-color: #ffffe0;
+    position: relative;
+    padding: 1px 10px;
+  }
+
+  article footer {
+    background-color: #f0f3f9;
+    padding: 10px;
+    bottom: 10vh;
+    z-index: -1;
+  }
+</style>
+
+<body>
+  <article>
+    <section>
+      <h4>React 教程</h4>
+      <content>
+        <p>12月2日，有网友爆料称...</p>
+      </content>
+      <footer>网友评论：...</footer>
+    </section>
+    <section>
+      <h4>React 教程</h4>
+      <content>
+        <p>...</p>
+      </content>
+      <footer>网友评论：...</footer>
+    </section>
+    <section>
+      <h4>React 教程</h4>
+      <content>
+        <p>...</p>
+      </content>
+      <footer>网友评论：...</footer>
+    </section>
+  </article>
+</body>
+
+</html>
