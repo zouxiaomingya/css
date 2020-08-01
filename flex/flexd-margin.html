@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  .box {
+    width: 375px;
+    height: 70vh;
+    background: skyblue;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    /* overflow: hidden; */
+    padding: 0 12px;
+    box-sizing: border-box;
+
+  }
+
+  .box1 {
+    width: 100%;
+    height: 100%;
+    background: red;
+  }
+
+  .box2 {
+    height: 100%;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    margin-left: 100%;
+    background: pink;
+    /* margin-top: -30px; */
+    /* transform: translateX(100%); */
+    transition: margin-left 0.3s;
+
+    /* transition: transform 0.3s ease-out; */
+  }
+
+  .show {
+    margin-left: 0;
+    transition: margin-left 0.3s;
+    /* transition: transform 0.3s ease-out; */
+  }
+
+  .content {
+    width: 100px;
+    height: 100px;
+    background: skyblue;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+</style>
+
+<body>
+  https://meyerweb.com/eric/thoughts/2011/09/12/un-fixing-fixed-elements-with-css-transforms/
+
+  使用了 transform 的元素，注意： 子元素的 fiexd 不在相对于窗口而是该父元素定位
+  <div class="box">
+    <div class="box1"></div>
+    <div class="box2">
+      <div class="content">这里的 fixed 定位是相对于 box2 的</div>
+    </div>
+  </div>
+</body>
+
+<script>
+  setTimeout(() => {
+    const box2 = document.getElementsByClassName('box2')[0];
+    box2.classList.add('show')
+  }, 1000)
+
+  setTimeout(() => {
+    const box2 = document.getElementsByClassName('box2')[0];
+    box2.classList.remove('show')
+  }, 2000)
+</script>
+
+</html>
