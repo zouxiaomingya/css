@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .tab-wrap {
+    width: 300px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+  }
+
+  .left {
+    background: url(https://img.yzcdn.cn/upload_files/2020/08/01/Fmyr1-oKLztHHRR5_uECAdDbm3DP.png?imageslim) no-repeat center center;
+    background-size: 100% 100%;
+    background-position: top;
+  }
+
+  .right {
+    background: url(https://img.yzcdn.cn/upload_files/2020/08/01/FufFeqgYQQjjXIfSrPEGT4RJWbFw.png?imageslim) no-repeat center center;
+    background-size: 100% 100%;
+    background-position: top;
+  }
+
+  .tab {
+    text-align: center;
+    width: 100%;
+  }
+
+  .box{
+    display: none;
+  }
+</style>
+
+<body>
+  <div class="box right">111  </div>
+  <div class="tab-wrap left">
+    <div class="tab">电影</div>
+    <div class="tab">电视</div>
+  </div>
+</body>
+
+<script>
+  const tabWrap = document.getElementsByClassName('tab-wrap')[0];
+
+  const tab1 = document.getElementsByClassName('tab')[0];
+  const tab2 = document.getElementsByClassName('tab')[1];
+
+
+  tab1.onclick = () => {
+    tabWrap.classList.add('left');
+    tabWrap.classList.remove('right');
+  }
+
+  tab2.onclick = () => {
+    tabWrap.classList.add('right');
+    tabWrap.classList.remove('left')
+  }
+</script>
+
+</html>
