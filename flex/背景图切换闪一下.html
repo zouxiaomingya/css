@@ -29,17 +29,23 @@
   .tab {
     text-align: center;
     width: 100%;
+    line-height: 40px;
+    /* background-color: #fff7f4; */
   }
 
-  .box{
+  .active {
+    /* background-color: #fff; */
+  }
+
+  .box {
     display: none;
   }
 </style>
 
 <body>
-  <div class="box right">111  </div>
+  <div class="box right">111 </div>
   <div class="tab-wrap left">
-    <div class="tab">电影</div>
+    <div class="tab active">电影</div>
     <div class="tab">电视</div>
   </div>
 </body>
@@ -54,11 +60,15 @@
   tab1.onclick = () => {
     tabWrap.classList.add('left');
     tabWrap.classList.remove('right');
+    tab1.classList.add('active');
+    tab2.classList.remove('active');
   }
 
   tab2.onclick = () => {
     tabWrap.classList.add('right');
     tabWrap.classList.remove('left')
+    tab2.classList.add('active');
+    tab1.classList.remove('active');
   }
 </script>
 
