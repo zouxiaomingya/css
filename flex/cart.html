@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  body {
+    background: #ccc;
+  }
+
+  .box {
+    width: 375px;
+    height: 100vh;
+    background-color: #f7f7f7;
+    overflow: hidden;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .edit {
+    width: 100%;
+    height: 20px;
+    text-align: right;
+  }
+
+  .shop-wrap {
+    width: 100%;
+    min-height: 100px;
+    background: #fff;
+    margin: 8px 0;
+  }
+  .shop-name{
+    position: sticky;
+    /* z-index: 1; */
+    background: #fff;
+    padding: 8px 0;
+    top: 0;
+  }
+  .footer{
+    height: 1300px;
+  }
+</style>
+
+<body>
+  <div class="box">
+    <div class="edit">编辑</div>
+    <div class="shop-wrap">
+      <div class="shop-name">爱逛</div>
+      <div class="">
+        <div class="goods">商品一</div>
+        <div class="goods">商品一</div>
+        <div class="goods">商品一</div>
+        <div class="goods">商品一</div>
+        <div class="goods">商品一</div>
+        <div class="goods">商品一</div>
+      </div>
+    </div>
+    <div class="footer"></div>
+  </div>
+</body>
+
+</html>
