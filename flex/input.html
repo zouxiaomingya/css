@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <textarea name="ad" id="text" cols="30" rows="10"></textarea>
+  <button id="btn">点击</button>
+</body>
+<script>
+  const dom = document.getElementById('text');
+  const btn = document.getElementById('btn');
+  btn.onclick = () => {
+    console.log(dom.value);
+    const str = dom.value;
+    const arr = str.trim().replace(/\n/g, " ").split(' ').filter(item => item)
+    console.log(arr);
+  }
+</script>
+
+</html>

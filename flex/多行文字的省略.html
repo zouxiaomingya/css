@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .box {
+    width: 200px;
+    font-size: 40px;
+    background: #ccc;
+  }
+
+  .ellipsis-l2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    position: relative;
+  }
+
+  .info {
+    font-size: 14px;
+  }
+
+  .text {
+    position: absolute;
+    right: 2px;
+    bottom: 0;
+    font-size: 14px;
+    color: rgb(223, 20, 162);
+  }
+</style>
+
+<body>
+
+  <p>谷歌后面修复了这个小问题， safari. 或者小程序，移动端还是可以使用</p>
+  <div class="box ellipsis-l2">
+    <div class="info">
+      通过 ellipsis-l2 样式中设置省略好大小。然后 info 里面设置文字大小。
+      文字过长了之后就会省略，两行样式的省略。
+      <span class="text">
+        展开
+      </span>
+    </div>
+
+  </div>
+</body>
+
+</html>
