@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<style>
+  .box {
+    width: 500px;
+    height: 50px;
+    border: 1px solid red;
+    display: flex;
+  }
+
+  .img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .content {
+    display: flex;
+    flex: 1 1 auto;
+    /* 技巧： 给一个宽度0 通过 flex 1 1 auto 自适应宽度 */
+    width: 0
+  }
+
+  .left {
+    width: 40px;
+    flex-shrink: 0;
+    background: skyblue;
+  }
+
+  .mid {
+    margin: 0 10px;
+    flex: 1 1 auto;
+    background: #ccc;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .right {
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+</style>
+
+<body>
+  <div class="box">
+    <img src="https://img.yzcdn.cn/upload_files/2020/09/16/FjO39Kdu6R1Gj-rxIWaCEzuwNaKy.png" alt="">
+    <div class="content">
+      <div class="left"></div>
+      <div class="mid">阿四大大大大萨达萨达达达四大大发达达达四大大发大发大的发电发生地方</div>
+      <div class="right">121212211211122</div>
+    </div>
+  </div>
+</body>
+
+</html>
