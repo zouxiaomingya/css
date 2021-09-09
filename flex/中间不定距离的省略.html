@@ -11,7 +11,7 @@
 <style>
   .box {
     width: 500px;
-    height: 50px;
+    height: 80px;
     border: 1px solid red;
     display: flex;
   }
@@ -23,6 +23,7 @@
 
   .content {
     display: flex;
+    align-items: flex-start;
     flex: 1 1 auto;
     /* 技巧： 给一个宽度0 通过 flex 1 1 auto 自适应宽度 */
     width: 0
@@ -45,8 +46,14 @@
 
   .right {
     margin-right: 10px;
-    flex-shrink: 0;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
+
 </style>
 
 <body>
@@ -55,7 +62,7 @@
     <div class="content">
       <div class="left"></div>
       <div class="mid">阿四大大大大萨达萨达达达四大大发达达达四大大发大发大的发电发生地方</div>
-      <div class="right">121212211211122</div>
+      <div class="right">阿四大大大大萨达萨达达达四大大发达达达四大大发大发大的发电发生地方</div>
     </div>
   </div>
 </body>

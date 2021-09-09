@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  td {
+    /* border: 1px solid #000; */
+    border-collapse: collapse;
+    text-align: center;
+  }
+
+  table {
+    margin: 100px;
+    border-collapse: collapse;
+  }
+
+
+  .content {
+    border: 1px solid red;
+
+  }
+  .content td{
+    border-right: 1px solid red;
+  }
+
+  .title div {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+
+    /* width: calc(100% + 1px); */
+    height: 26px;
+    margin-top: 10px;
+    padding: 12px;
+    border: 1px solid red;
+    border-bottom: 0;
+    background: #f7f8fa;
+    color: #5f5e60;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+</style>
+
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Band</th>
+        <th scope="col">Year formed</th>
+        <th scope="col">No. of Albums</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="title">
+        <td colSpan='3'>
+          <div> width</div>
+        </td>
+      </tr>
+
+      <tr class="content">
+        <td>1976</td>
+        <td>9</td>
+        <td>Ever fallen in shouldn't've)</td>
+      </tr>
+
+      <tr class="title">
+        <td colSpan='3'>
+          <div> width</div>
+        </td>
+      </tr>
+
+      <tr class="content">
+        <td>1976</td>
+        <td>6</td>
+        <td>London Calling</td>
+      </tr>
+
+    </tbody>
+
+  </table>
+</body>
+
+</html>
